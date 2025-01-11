@@ -15,6 +15,7 @@ final class Application extends DefaultApplication
 {
     public const ACTIVE_DIR_OPTION = 'active-dir';
     public const STAGING_DIR_OPTION = 'staging-dir';
+    public const INCLUDE_OPTION = 'include';
 
     public const EXCLUDE_OPTION = 'exclude';
 
@@ -59,6 +60,14 @@ final class Application extends DefaultApplication
                     'e',
                     InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
                     'Specify paths to exclude from syncing.',
+                ),
+            );
+            $inputDefinition->addOption(
+                new InputOption(
+                    self::INCLUDE_OPTION,
+                    'i',
+                    InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
+                    'If specified only sync the given paths and exclude all others.',
                 ),
             );
         } catch (InvalidArgumentException $e) {
