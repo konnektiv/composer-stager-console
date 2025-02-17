@@ -15,6 +15,7 @@ final class Application extends DefaultApplication
 {
     public const ACTIVE_DIR_OPTION = 'active-dir';
     public const STAGING_DIR_OPTION = 'staging-dir';
+    public const INCLUDE_BASE_DIR_OPTION = 'include-base-dir';
     public const INCLUDE_OPTION = 'include';
 
     public const EXCLUDE_OPTION = 'exclude';
@@ -68,6 +69,14 @@ final class Application extends DefaultApplication
                     'i',
                     InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
                     'If specified only sync the given paths and exclude all others.',
+                ),
+            );
+            $inputDefinition->addOption(
+                new InputOption(
+                    self::INCLUDE_BASE_DIR_OPTION,
+                    'b',
+                    InputOption::VALUE_OPTIONAL,
+                    'If specified use this directory to compute excluded paths from the include option. Uses the active directory if not specified.',
                 ),
             );
         } catch (InvalidArgumentException $e) {

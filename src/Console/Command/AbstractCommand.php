@@ -132,8 +132,14 @@ abstract class AbstractCommand extends Command
         $exclusions = [];
 
         if (! empty($include)) {
+            $baseDir = $input->getOption(Application::INCLUDE_BASE_DIR_OPTION);
+            $baseDir = $baseDir
+                                                                ? $baseDir
+                                                                : $activeDir;
+            $baseDir = $this->pathFactory->create($baseDir);
+
             // Filter the list to exclude the entries not in the included array
-            $exclusions = $this->getExcludedPaths($this->activeDir->absolute(), $include);
+            $exclusions = $this->getExcludedPaths($baseDir->absolute(), $include);
         }
 
         $this->exclusions = $this->pathListFactory->create(...$exclusions, ...$exclude);
